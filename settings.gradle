@@ -1,1 +1,1 @@
-include ':test_app'
+include ':test_app', ':simple_java_app'
