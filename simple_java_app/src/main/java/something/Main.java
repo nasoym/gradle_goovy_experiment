@@ -1,4 +1,4 @@
-package test;
+package something;
 
 public class Main {
 
