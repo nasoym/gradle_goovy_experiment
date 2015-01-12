@@ -1,1 +1,1 @@
-include ':simple_groovy_app', ':simple_java_app'
+include ':simple_groovy_app', ':simple_java_app', ':simple_java_app_with_groovy_test'
