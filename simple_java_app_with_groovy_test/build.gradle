@@ -4,10 +4,6 @@ apply plugin:'application'
 
 mainClassName = 'something.Main'
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     testCompile 'org.codehaus.groovy:groovy-all:2.3.6'
     testCompile 'junit:junit:4.12'
