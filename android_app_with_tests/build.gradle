@@ -7,6 +7,7 @@ buildscript {
         classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.1.1'
     }
 }
+apply plugin: 'jacoco'
 apply plugin: 'android'
 
 android {
@@ -15,6 +16,39 @@ android {
 }
 
 apply plugin: 'android-unit-test'
+
+jacoco {  
+    toolVersion = "0.7.2.201409121644"
+}
+
+def coverageSourceDirs = [
+    'src/main/java'
+]
+
+task jacocoReport(type:JacocoReport) {
+    group = "Reporting"
+
+    description = "Generate Jacoco coverage reports"
+
+    classDirectories = fileTree(
+            dir: 'build/intermediates/classes/debug',
+            excludes: ['**/R.class',
+                       '**/R$*.class',
+                       '**/*$ViewInjector*.*',
+                       '**/BuildConfig.*',
+                       '**/Manifest*.*']
+    )
+
+    additionalSourceDirs = files(coverageSourceDirs)
+    sourceDirectories = files(coverageSourceDirs)
+    executionData = files('build/jacoco/testDebug.exec')
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+}
 
 dependencies {
     testCompile 'junit:junit:4.12'

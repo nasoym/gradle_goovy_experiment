@@ -12,4 +12,10 @@ public class TestActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
     }
+
+    public void hello() {
+        float hello = 9;
+        hello += 4;
+    }
+
 }
