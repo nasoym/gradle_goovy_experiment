@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'org.robolectric:robolectric-gradle-plugin:0.14.+'
+    }
+}
+apply plugin: 'android'
+apply plugin: 'robolectric'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "20.0.0"
+}
+
+dependencies {
+    repositories {
+        mavenCentral()
+    }
+    compile project(':android_app')
+
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile('org.robolectric:robolectric:2.4')
+
+}
