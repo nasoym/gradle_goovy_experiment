@@ -18,3 +18,4 @@ public class SomeGroovyTest {
 
 }
 
+println "hello world"
