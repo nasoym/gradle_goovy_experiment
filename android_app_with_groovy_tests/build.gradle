@@ -37,10 +37,10 @@ android {
                 srcDirs = ['src/main/res']
             }
         } 
-        test { 
+        testDebug { 
             java {
-                srcDirs = ['src/test/java']
-                //srcDirs = ['src/test/java','src/test/groovy']
+                //srcDirs = ['src/test/java']
+                srcDirs = ['src/test/java','src/test/groovy']
             }
         } 
     }
@@ -52,6 +52,17 @@ android {
 apply plugin: 'android-unit-test'
 apply plugin: 'groovyx.grooid.groovy-android'
 
+
+/*
+compileTestDebugJava.doLast {
+    //tasks.compileDebugTestGroovy.execute()
+    println "hello"
+}
+processTestDebugResources.doFirst {
+    println "hello"
+}
+*/
+
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:2.4'
@@ -60,7 +71,12 @@ dependencies {
     //compile 'org.codehaus.groovy:groovy:2.4.0-beta-3:grooid'
     //testCompile 'org.codehaus.groovy:groovy:2.4.0-beta-3:grooid'
 
+    compile 'junit:junit:4.12'
+    compile 'org.robolectric:robolectric:2.4'
+
     compile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
     testCompile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
+    //debugCompile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
+    //testCompile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
 }
 
