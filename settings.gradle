@@ -1,7 +1,11 @@
-include 'simple_groovy_app'
-include 'simple_java_app'
-include 'simple_java_app_with_groovy_test'
-include 'android_app'
-include 'android_app_with_tests'
-include 'android_app_with_groovy_tests'
+//include 'simple_groovy_app'
+//include 'simple_java_app'
+//include 'simple_java_app_with_groovy_test'
+//include 'android_app'
+//include 'android_app_with_tests'
+//include 'android_app_with_groovy_tests'
+
+include 'android_groovy'
+
+//include 'android_app_with_robospock'
 //include 'android_robolectric_tests'
