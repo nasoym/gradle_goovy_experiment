@@ -1,23 +1,18 @@
 buildscript {
     repositories {
-        //jcenter()
+        jcenter()
         mavenLocal()
         mavenCentral()
-        /*
-        maven {
-            url = 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
-        }
-        */
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.14.0'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         //classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.5'
         classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.6-SNAPSHOT'
-        classpath 'org.robolectric:robolectric-gradle-plugin:0.12.+'
+        classpath 'org.robolectric:robolectric-gradle-plugin:0.14.+'
     }
 }
-apply plugin: 'android'
-//apply plugin: 'com.android.application'
+//apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
