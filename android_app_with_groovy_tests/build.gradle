@@ -5,12 +5,17 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
+        //classpath 'com.android.tools.build:gradle:0.14.2'
         classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.1.1'
-        classpath 'me.champeau.gradle:gradle-groovy-android-plugin:0.3.4'
+        //classpath 'me.champeau.gradle:gradle-groovy-android-plugin:0.3.4'
+        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.5'
     }
 }
-apply plugin: 'android'
-apply plugin: 'me.champeau.gradle.groovy-android'
+//apply plugin: 'groovy'
+//apply plugin: 'android'
+apply plugin: 'com.android.application'
+
+//apply plugin: 'me.champeau.gradle.groovy-android'
 
 android {
     compileSdkVersion 19
@@ -18,14 +23,44 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    /*
+    sourceSets { 
+        main { 
+            manifest {
+                srcFile 'src/main/AndroidManifest.xml'
+            }
+            java {
+                srcDirs = ['src/main/java','src/main/groovy']
+            }
+            res {
+                srcDirs = ['src/main/res']
+            }
+        } 
+        test { 
+            java {
+                srcDirs = ['src/test/java']
+                //srcDirs = ['src/test/java','src/test/groovy']
+            }
+        } 
+    }
+    */
+
+
 }
 
 apply plugin: 'android-unit-test'
+apply plugin: 'groovyx.grooid.groovy-android'
 
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:2.4'
-    compile 'org.codehaus.groovy:groovy:2.4.0-beta-3:grooid'
+
+    //compile 'org.codehaus.groovy:groovy:2.3.6'
+    //compile 'org.codehaus.groovy:groovy:2.4.0-beta-3:grooid'
     //testCompile 'org.codehaus.groovy:groovy:2.4.0-beta-3:grooid'
+
+    compile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
+    testCompile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
 }
 

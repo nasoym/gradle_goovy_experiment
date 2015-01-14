@@ -18,23 +18,15 @@ public class SomeGroovyTest {
     }
 
 }
+*/
+
 import groovy.util.GroovyTestCase;
 
-class SomeGroovyTest extends GroovyTestCase {
+class MyTest extends GroovyTestCase {
     void testSomething() {
         assert 1 == 1
     }
 
 }
-*/
-
-import org.junit.Test
-import static org.junit.Assert.assertTrue
-
-class SomeGroovyTest {
-    @Test
-    void someTest() {
-        assertTrue(true)
-    }
 
 //println "hello world from SomeGroovyTest"
