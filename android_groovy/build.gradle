@@ -17,6 +17,11 @@ apply plugin: 'android'
 android {
     compileSdkVersion 19
     buildToolsVersion "20.0.0"
+
+
+      lintOptions {
+          abortOnError false
+      }
 }
 
 apply plugin: 'groovyx.grooid.groovy-android'
@@ -25,11 +30,8 @@ apply plugin: 'robolectric'
 dependencies {
     compile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
 
-    compile 'junit:junit:4.12'
-    compile 'org.robolectric:robolectric:2.4'
-
-    //testCompile 'junit:junit:4.12'
-    //testCompile 'org.robolectric:robolectric:2.4'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:2.4'
 }
 
 task allTasks << {
@@ -58,12 +60,18 @@ foo.doLast {
   
 allprojects {
     afterEvaluate { project ->
+        println "project.configurations: $project.configurations"
         def TEST_CLASSES_DIR = 'test-classes'
         def testDestinationDirectory = project.files("$project.buildDir/$TEST_CLASSES_DIR").getSingleFile()
         project.tasks.compileDebugTestGroovy.destinationDir testDestinationDirectory
+        //println "----: " + project.tasks.compileDebugTestGroovy.classpath
 
-        project.tasks.testDebug.dependsOn project.tasks.compileDebugTestSources
-        //project.tasks.testDebug.dependsOn project.tasks.compileDebugTestGroovy
+        project.tasks.compileDebugTestGroovy.classpath = project.tasks.compileTestDebugJava.classpath
+        project.tasks.compileDebugTestGroovy.classpath.each {File file ->
+            println "---: " + file.name
+        }
+
+        //project.tasks.testDebug.dependsOn project.tasks.compileDebugTestSources
+        project.tasks.testDebug.dependsOn project.tasks.compileDebugTestGroovy
     }
 }
-
