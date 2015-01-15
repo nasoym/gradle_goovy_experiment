@@ -24,7 +24,29 @@ apply plugin: 'groovyx.grooid.groovy-android'
 
 dependencies {
     compile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
+    //compile 'junit:junit:4.12'
+    //compile 'org.robolectric:robolectric:2.4'
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:2.4'
 }
 
+task something << {
+  //tasks.matching { Task task -> task.name.startsWith("testDebug")}
+  //println tasks.getByPath('android_groovy:compileTestDebugJava').path
+  println '333333333333333333333333333333'
+  //println tasks.compileTestDebugJava.name
+  //println tasks.compileTestDebugJava
+  tasks.compileTestDebugJava.doLast {
+      println '3333399999999999999999999'
+      println '7777777777777777777777'
+  }
+  tasks.compileTestDebugJava.dependsOn tasks.compileDebugTestGroovy
+
+
+}
+
+test.dependsOn something
+
+task allTasks << {
+  println project.tasks
+}
