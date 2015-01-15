@@ -70,6 +70,7 @@ allprojects {
         project.tasks.compileDebugTestGroovy.classpath.each {File file ->
             println "---: " + file.name
         }
+        //println project.tasks.compileDebugTestGroovy.classpath
 
         //project.tasks.testDebug.dependsOn project.tasks.compileDebugTestSources
         project.tasks.testDebug.dependsOn project.tasks.compileDebugTestGroovy
