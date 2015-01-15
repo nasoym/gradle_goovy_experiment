@@ -1,52 +1,69 @@
 buildscript {
     repositories {
         jcenter()
-        mavenLocal()
+        //mavenLocal()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
-        //classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.5'
-        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.6-SNAPSHOT'
+        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.5'
         classpath 'org.robolectric:robolectric-gradle-plugin:0.14.+'
+        //classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.6-SNAPSHOT'
+        //classpath 'org.robolectric:robolectric-gradle-plugin:0.14.1-SNAPSHOT'
     }
 }
-//apply plugin: 'android'
-apply plugin: 'com.android.application'
+apply plugin: 'android'
 
 android {
     compileSdkVersion 19
     buildToolsVersion "20.0.0"
 }
 
-apply plugin: 'robolectric'
 apply plugin: 'groovyx.grooid.groovy-android'
+apply plugin: 'robolectric'
 
 dependencies {
     compile 'org.codehaus.groovy:groovy:2.4.0-rc-2:grooid'
-    //compile 'junit:junit:4.12'
-    //compile 'org.robolectric:robolectric:2.4'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:2.4'
+
+    compile 'junit:junit:4.12'
+    compile 'org.robolectric:robolectric:2.4'
+
+    //testCompile 'junit:junit:4.12'
+    //testCompile 'org.robolectric:robolectric:2.4'
 }
-
-task something << {
-  //tasks.matching { Task task -> task.name.startsWith("testDebug")}
-  //println tasks.getByPath('android_groovy:compileTestDebugJava').path
-  println '333333333333333333333333333333'
-  //println tasks.compileTestDebugJava.name
-  //println tasks.compileTestDebugJava
-  tasks.compileTestDebugJava.doLast {
-      println '3333399999999999999999999'
-      println '7777777777777777777777'
-  }
-  tasks.compileTestDebugJava.dependsOn tasks.compileDebugTestGroovy
-
-
-}
-
-test.dependsOn something
 
 task allTasks << {
   println project.tasks
 }
+
+task foobar << {
+    println "execution of task foobar"
+}
+
+task bar << {
+    println "execution of task bar"
+}
+bar.dependsOn foobar
+
+task foo {
+    println "creation of task foo"
+    dependsOn bar
+}
+foo.doFirst {
+    println "doFirst of task foo"
+}
+foo.doLast {
+    println "doLast of task foo"
+}
+  
+allprojects {
+    afterEvaluate { project ->
+        def TEST_CLASSES_DIR = 'test-classes'
+        def testDestinationDirectory = project.files("$project.buildDir/$TEST_CLASSES_DIR").getSingleFile()
+        project.tasks.compileDebugTestGroovy.destinationDir testDestinationDirectory
+
+        project.tasks.testDebug.dependsOn project.tasks.compileDebugTestSources
+        //project.tasks.testDebug.dependsOn project.tasks.compileDebugTestGroovy
+    }
+}
+
